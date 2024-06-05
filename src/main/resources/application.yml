@@ -1,0 +1,58 @@
+spring:
+  application:
+    name: demo
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    jdbc-url: jdbc:mysql://localhost:3306/demo?allowPublicKeyRetrieval=true&useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true
+    username: admin
+    password: admin
+    driverClassName: com.mysql.cj.jdbc.Driver
+    hikari:
+      poolName: Hikari
+      auto-commit: false
+      maxLifeTime:
+        local: 300000 #5 minutes
+        master: 600000 #10 minutes
+      maximumPoolSize: 10
+      connectionTestQuery: SELECT 1
+      data-source-properties:
+        cachePrepStmts: true
+        prepStmtCacheSize: 250
+        prepStmtCacheSqlLimit: 2048
+        useServerPrepStmts: true
+    jpa:
+    flyway:
+      enabled: true
+      locations: classpath:migration
+
+app:
+  defaultPassword: Lw@123
+  security:
+    authentication:
+      jwt:
+        base64-secret: GYyZGIwMjczZjA1OTZmMzNlYzM5NTgxYTJZWEyODQ2YWRiNWIzNTEzNWZmMGFjOWVjZTY3NmNhMjAzYTY4ZTdiNDViMDc3ZThjZDNlMmFlN2QyYjI4N2I3MjBjZjRkM
+        token-validity-in-seconds: 86400
+  token-cache:
+    host: redis
+    port: 6379
+    password:
+    ttl: 3600
+    enabled: true
+  cors:
+    allowed_origins: '*'
+    allowed_origin_patterns: '*'
+    allowed_methods: 'POST, PUT, GET, DELETE, OPTIONS'
+    allowed_headers: '*'
+    exposed_headers: '*'
+    allow_credentials: false
+    max_age: 86400
+
+server:
+  port: 8080
+  name: DEV
+
+time-zone:
+  id: Asia/Ho_Chi_Minh
+
+password:
+  key: '4b110efeca2d058b9e41ab2d226bba50'
